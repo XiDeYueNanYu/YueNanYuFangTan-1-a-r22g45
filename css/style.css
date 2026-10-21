@@ -44,7 +44,7 @@ nav#nav{width:calc(var(--navw)*var(--s)*.92);flex-shrink:0;background:var(--pane
 
 /* ----- Nội dung ----- */
 .content{flex:1;min-width:0;display:flex;flex-direction:column}
-main{width:100%;max-width:calc(var(--mainw)*var(--s));margin:0 auto;padding:calc(34px*var(--s)) calc(30px*var(--s)) calc(26px*var(--s));flex:1}
+main{width:100%;max-width:calc(var(--mainw)*var(--s));margin:0 auto;padding:calc(34px*var(--s)) calc(30px*var(--s)) calc(84px*var(--s));flex:1}   /* chừa chỗ để các nút nối cuối bài không bị thanh công cụ cố định đè lên */
 .foot{text-align:center;color:var(--mute);font-size:calc(13px*var(--s));padding:calc(18px*var(--s)) calc(16px*var(--s)) calc(28px*var(--s))}
 .lesson-head{background:linear-gradient(135deg,var(--hero-a),var(--hero-b));color:var(--hero-ink);border-radius:var(--radius);padding:calc(30px*var(--s)) calc(32px*var(--s));margin-bottom:calc(22px*var(--s));box-shadow:var(--shadow)}
 .eyebrow{display:inline-block;font-size:calc(12.5px*var(--s));font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.85}
@@ -114,7 +114,7 @@ body.focus main{max-width:calc(var(--mainw)*var(--s)*1.2)}
   /* ngăn kéo mục lục mở BÊN DƯỚI thanh trên cùng (--tbh = chiều cao thanh, đặt bằng JS) để nút ☰/✕ luôn bấm được */
   nav#nav{position:fixed;left:0;top:var(--tbh,calc(54px*var(--s)));bottom:0;height:auto;width:min(calc(330px*var(--s)),86vw);z-index:50;transform:translateX(-102%);visibility:hidden;transition:transform .25s ease,visibility .25s}
   nav#nav.open{transform:none;visibility:visible;box-shadow:0 0 0 100vmax rgba(15,23,42,.45)}
-  main{padding:calc(18px*var(--s)) calc(14px*var(--s))}
+  main{padding:calc(18px*var(--s)) calc(14px*var(--s)) calc(100px*var(--s))}
   .tabs{top:calc(62px*var(--s))}
   .lesson-head{padding:calc(22px*var(--s)) calc(20px*var(--s))}
   .card{padding:calc(20px*var(--s)) calc(18px*var(--s))}
@@ -218,4 +218,5 @@ body.focus main{max-width:calc(var(--mainw)*var(--s)*1.2)}
 .iv-res{margin:calc(6px*var(--s)) 0;font-size:1.05em;font-weight:700}
 .iv-all{color:#1d7a40;margin-top:calc(4px*var(--s))}
 .iv-retry{padding:calc(7px*var(--s)) calc(18px*var(--s));border:1px solid var(--line);border-radius:calc(999px*var(--s));background:var(--panel);color:var(--ink);cursor:pointer}
+@media(max-width:900px){.iv-fab{bottom:calc(64px*var(--s))}}   /* chừa chỗ cho thanh cỡ chữ cố định của trang bài giảng */
 @media(max-width:560px){.iv-pane{padding:calc(10px*var(--s)) calc(8px*var(--s)) calc(14px*var(--s))}.iv-who{width:3.8em}.iv-b{max-width:84%}.iv-mode,.iv-tg{padding:calc(6px*var(--s)) calc(12px*var(--s));font-size:calc(14px*var(--s))}}

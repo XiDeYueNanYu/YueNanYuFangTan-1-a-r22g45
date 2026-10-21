@@ -178,7 +178,7 @@
     var L={};try{L=JSON.parse(root.getAttribute('data-l')||'{}')}catch(e){}
     var $=function(s){return root.querySelector(s)},$$=function(s){return [].slice.call(root.querySelectorAll(s))};
     var chat=$('.iv-chat'),quiz=$('.iv-quiz'),modes=$$('.iv-mode');
-    var bubbles=$$('.iv-b'),cur=null,mem={y:0,t:0};
+    var bubbles=$$('.iv-b'),cur=null,mem={y:0,t:0,qy:null};   // y: vị trí cuộn bên 听访谈, qy: vị trí cuộn bên 回答问题, t: vị trí audio
 
     function mark(el){if(cur===el)return;cur=el;bubbles.forEach(function(b){b.classList.toggle('playing',b===el)})}
     function stopOwn(){if(OWN){try{OWN.pause()}catch(e){}OWN=null}}
@@ -224,10 +224,12 @@
     /* ----- chuyển 听访谈 / 回答问题: nhớ vị trí cuộn và vị trí audio để quay lại đúng chỗ ----- */
     function setMode(m){
       var q=m==='quiz';if(!quiz)return;
-      if(q&&!chat.hidden){mem.y=window.pageYOffset;if(bar){mem.t=bar.au.currentTime;bar.pause()}stopOwn();$$('.iv-la').forEach(function(a){a.pause()})}
+      if(q?!quiz.hidden:!chat.hidden)return;   // đã ở đúng chế độ
+      if(q){mem.y=window.pageYOffset;if(bar){mem.t=bar.au.currentTime;bar.pause()}stopOwn();$$('.iv-la').forEach(function(a){a.pause()})}
+      else mem.qy=window.pageYOffset;
       chat.hidden=q;quiz.hidden=!q;
       modes.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-m')===m?'true':'false')});
-      if(q)root.scrollIntoView({block:'start'});
+      if(q){if(mem.qy!=null)window.scrollTo({top:mem.qy,behavior:'instant'});else root.scrollIntoView({block:'start'})}
       else{
         if(bar&&isFinite(mem.t))try{bar.au.currentTime=mem.t}catch(e){}
         window.scrollTo({top:mem.y,behavior:'instant'});
